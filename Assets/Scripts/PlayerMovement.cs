@@ -7,15 +7,19 @@ public class PlayerMovement : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Transform feetPosition;
     public LayerMask groundLayer;
-    public float groundCheckCircle = 0.1f; 
+    public float groundCheckCircle = 0.1f;
     public float speed = 5.0f;
-    public float playerGravity = 3.0f;
-    public float jumpForce = 3.0f;
-    public float zRotationLimit = 10.0f; // How much wobble
+    public float playerGravity = 3.0f; 
+    public float jumpForce = 11.0f;
+    public float zRotationLimit = 4.0f; // How much wobble
     public float idleAnimCoyoteTime = 0.15f; // The grace period duration
     public float idleAnimCoyoteTimeCounter;
     public float input;
     public bool isGrounded;
+    public bool isJumping;
+    public float jumpTime = 0.35f;
+    public float jumpTimeCounter;
+
 
 
 
@@ -61,10 +65,36 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
+            // set initial jump state
+            isJumping = true;
+            // reset jumpTimeCounter
+            jumpTimeCounter = jumpTime;
+            // perform jump
             playerRb.linearVelocity = Vector2.up * jumpForce;
         }
 
+        if (Input.GetButton("Jump") && isJumping)
+        {
 
+            if (jumpTimeCounter > 0)
+            {
+                // begin decreasing counter
+                jumpTimeCounter -= Time.deltaTime;
+                // continue jumping
+                playerRb.linearVelocity = Vector2.up * (jumpForce * 0.5f);
+            } else
+            {
+                // reset jump state
+                isJumping = false;
+            }
+        }
+
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            // reset jump state on button release
+            isJumping = false;   
+        }
         
 
     }

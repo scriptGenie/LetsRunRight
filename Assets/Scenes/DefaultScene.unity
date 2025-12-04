@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 21408061}
   - component: {fileID: 21408060}
   - component: {fileID: 21408059}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrassBrick2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.484, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 154006102}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &30499383
@@ -425,9 +426,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1a15c528079f1e28314c18e7ef3a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  playerRb: {fileID: 30499384}
-  speed: 0
+  playerRb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  feetPosition: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheckCircle: 0.1
+  speed: 5
+  playerGravity: 3
+  jumpForce: 11
+  zRotationLimit: 4
+  idleAnimCoyoteTime: 0.15
+  idleAnimCoyoteTimeCounter: 0
   input: 0
+  isGrounded: 0
+  isJumping: 0
+  jumpTime: 0.35
+  jumpTimeCounter: 0
+--- !u!1 &154006101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 154006102}
+  m_Layer: 0
+  m_Name: FeetPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &154006102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154006101}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.434, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 30499382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &164942652
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +486,7 @@ GameObject:
   - component: {fileID: 164942655}
   - component: {fileID: 164942654}
   - component: {fileID: 164942653}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Brick3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1028,7 +1075,7 @@ GameObject:
   - component: {fileID: 401498400}
   - component: {fileID: 401498399}
   - component: {fileID: 401498398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Brick1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1212,7 @@ GameObject:
   - component: {fileID: 932042711}
   - component: {fileID: 932042710}
   - component: {fileID: 932042709}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrassBrick1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,7 +1349,7 @@ GameObject:
   - component: {fileID: 1030730453}
   - component: {fileID: 1030730452}
   - component: {fileID: 1030730451}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Brick2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1601,7 +1648,7 @@ GameObject:
   - component: {fileID: 2099017487}
   - component: {fileID: 2099017486}
   - component: {fileID: 2099017485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GrassBrick3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
