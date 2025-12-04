@@ -41,6 +41,9 @@ TagManager:
   - name: Background
     uniqueID: 714487347
     locked: 0
+  - name: Bricks
+    uniqueID: 1953057651
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
