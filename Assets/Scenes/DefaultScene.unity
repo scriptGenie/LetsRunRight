@@ -582,7 +582,7 @@ SpriteRenderer:
   m_SortingLayerID: 714487347
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0d3b085d2f94a805a73cd6de2c047dd, type: 3}
   m_Color: {r: 0.42998034, g: 0.064524755, b: 0.4716981, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -975,6 +975,8 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   smoothSpeed: 3.75
+  gameBackground: {fileID: 0}
+  backgroundVector: {x: 0, y: 0, z: 0}
 --- !u!1001 &364634798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1541,7 +1543,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
