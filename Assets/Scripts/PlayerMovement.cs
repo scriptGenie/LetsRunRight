@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     public Rigidbody2D playerRb;
     public SpriteRenderer spriteRenderer;
     public Transform feetPosition;
     public LayerMask groundLayer;
     public float groundCheckCircle = 0.1f;
     public float speed = 5.0f;
-    public float playerGravity = 3.0f; 
+    public float playerGravity = 3.0f;
     public float jumpForce = 11.0f;
     public float extendedJumpForce;
     public float extendedJumpGravity;
@@ -19,16 +18,9 @@ public class PlayerMovement : MonoBehaviour
     public float input;
     public bool isGrounded;
     public bool isJumping;
-    // public float jumpTime = 0.35f;
     public float jumpTime = 0.16f;
     public float jumpTimeCounter;
-
-
-
-private void ResetPlayerGravity()
-    {
-        playerRb.gravityScale = playerGravity;
-    }
+    private Vector3 resetCoords;
 
 
     // Start is called before the first frame update
@@ -38,33 +30,42 @@ private void ResetPlayerGravity()
         playerRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         ResetPlayerGravity();
-        // playerRb.gravityScale = playerGravity;
         groundLayer = LayerMask.GetMask("Ground");
         extendedJumpForce = jumpForce * 0.7f;
         extendedJumpGravity = 2.0f;
+        resetCoords = transform.position;
+
 
         // find childObject for Feet
         Transform intialFeetPosition = transform.Find("FeetPosition");
-        
+
         if (intialFeetPosition != null)
         {
             feetPosition = intialFeetPosition;
-        } else
+        }
+        else
         {
             Debug.Log("--- child not found 'feetPosition' ---");
         }
-    }  
+    }
 
 
     // Update is called once per frame
     void Update()
     {
+        // manual player position reset
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetPlayerPos();
+        }
+
         input = Input.GetAxisRaw("Horizontal");
-        
+
         if (input < 0)
         {
             spriteRenderer.flipX = false;
-        } else if (input > 0)
+        }
+        else if (input > 0)
         {
             spriteRenderer.flipX = true;
         }
@@ -92,7 +93,8 @@ private void ResetPlayerGravity()
                 // continue jumping
                 playerRb.gravityScale = extendedJumpGravity;
                 playerRb.linearVelocity = Vector2.up * extendedJumpForce;
-            } else
+            }
+            else
             {
                 // reset jump state
                 isJumping = false;
@@ -104,15 +106,16 @@ private void ResetPlayerGravity()
         if (Input.GetButtonUp("Jump"))
         {
             // reset jump state on button release
-            isJumping = false;   
+            isJumping = false;
         }
-        
+
 
     }
 
 
     // FixedUpdate is set to run at 50fps
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
 
         // Get the current local rotation
         Quaternion currentRotation = transform.localRotation;
@@ -127,9 +130,9 @@ private void ResetPlayerGravity()
 
         // Apply the new rotation, keeping X and Y as they were
         transform.localRotation = Quaternion.Euler(eulerRotation.x, eulerRotation.y, clampedZ);
-    
+
         // get speeds for movement left/right
-        playerRb.linearVelocity = new Vector2 (input * speed, playerRb.linearVelocity.y);
+        playerRb.linearVelocity = new Vector2(input * speed, playerRb.linearVelocity.y);
 
 
         // if player is moving
@@ -137,12 +140,14 @@ private void ResetPlayerGravity()
         {
             // Grace period
             idleAnimCoyoteTimeCounter = idleAnimCoyoteTime; // Reset counter
-        } else
+        }
+        else
         {
             // stop subtracting if already stopped at 0
             if (idleAnimCoyoteTimeCounter > 0)
             {
-               idleAnimCoyoteTimeCounter -= Time.deltaTime; 
+                //    idleAnimCoyoteTimeCounter -= Time.deltaTime; 
+                idleAnimCoyoteTimeCounter -= 0.1f;
             }
         }
 
@@ -154,6 +159,10 @@ private void ResetPlayerGravity()
 
     }
 
+
+
+
+    // ### HELPER FUNCTIONS
     // Helper function to normalize angles to -180 to 180 range
     float NormalizeAngle(float angle)
     {
@@ -161,6 +170,18 @@ private void ResetPlayerGravity()
         if (angle > 180)
             angle -= 360;
         return angle;
+    }
+
+
+    private void ResetPlayerGravity()
+    {
+        playerRb.gravityScale = playerGravity;
+    }
+
+    // Reset Character Position
+    void ResetPlayerPos()
+    {
+        transform.position = resetCoords;
     }
 
 }
