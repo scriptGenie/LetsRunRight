@@ -11,18 +11,24 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 5.0f;
     public float playerGravity = 3.0f; 
     public float jumpForce = 11.0f;
+    public float extendedJumpForce;
+    public float extendedJumpGravity;
     public float zRotationLimit = 4.0f; // How much wobble
     public float idleAnimCoyoteTime = 0.15f; // The grace period duration
     public float idleAnimCoyoteTimeCounter;
     public float input;
     public bool isGrounded;
     public bool isJumping;
-    public float jumpTime = 0.35f;
+    // public float jumpTime = 0.35f;
+    public float jumpTime = 0.16f;
     public float jumpTimeCounter;
 
 
 
-
+private void ResetPlayerGravity()
+    {
+        playerRb.gravityScale = playerGravity;
+    }
 
 
     // Start is called before the first frame update
@@ -31,8 +37,11 @@ public class PlayerMovement : MonoBehaviour
         // set initial stuff to avoid doing it manually in the editor
         playerRb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        playerRb.gravityScale = playerGravity;
+        ResetPlayerGravity();
+        // playerRb.gravityScale = playerGravity;
         groundLayer = LayerMask.GetMask("Ground");
+        extendedJumpForce = jumpForce * 0.7f;
+        extendedJumpGravity = 2.0f;
 
         // find childObject for Feet
         Transform intialFeetPosition = transform.Find("FeetPosition");
@@ -81,11 +90,13 @@ public class PlayerMovement : MonoBehaviour
                 // begin decreasing counter
                 jumpTimeCounter -= Time.deltaTime;
                 // continue jumping
-                playerRb.linearVelocity = Vector2.up * (jumpForce * 0.5f);
+                playerRb.gravityScale = extendedJumpGravity;
+                playerRb.linearVelocity = Vector2.up * extendedJumpForce;
             } else
             {
                 // reset jump state
                 isJumping = false;
+                ResetPlayerGravity();
             }
         }
 
