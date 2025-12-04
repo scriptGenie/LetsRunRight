@@ -2,7 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
-TEST_BUILD/*
+TEST_BUILDS/*
 .utmp/
 /[Ll]ibrary/
 /[Tt]emp/
