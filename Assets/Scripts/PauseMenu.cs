@@ -10,8 +10,25 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         pausePanel = GameObject.Find("PausePanel");
+
+        // brief delay to allow ScoreManager script to load child objects - TODO fix/remove
+        // Invoke("DeactivatePausePanel", 0.01f);
+
+        DeactivatePausePanel();
+        // pausePanel.SetActive(false);
+    }
+
+
+    void DeactivatePausePanel()
+    {
         pausePanel.SetActive(false);
     }
+
+
+
+
+
+
 
     // Update is called once per frame
     void Update()
